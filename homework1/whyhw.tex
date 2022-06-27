@@ -2,9 +2,9 @@
 
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amsthm}
 
 \title{作业一: L'Hopital法则的叙述与证明}
-
 
 \author{吴泓鹰 \\ 数学与应用数学(强基计划) 3210101890}
 
@@ -13,14 +13,79 @@
 \maketitle
 
 
-这是一个来自...领域的问题...
+这是一个来自分析学领域的问题，众所周知，两个无穷小之比或两个无穷大之比的极限可能存在，也可能不存在。因此，求这类极限时往往需要适当的变形，转化成可利用极限运算法则或重要极限的形式进行计算。洛必达法则便是应用于这类极限计算的通用方法。
 \section{问题描述}
-问题叙述如下: 令...
+问题叙述如下: 函数比值的极限等于其导数比值的极限，只要导数的比值的极限存在。
 
+用数学语言则表示为：
+
+(a)如果函数$f(x)$与函数$g(x)$在去心邻域$\tilde{B}_{\delta}(x)$内可导且$g(x)\ne0$恒成立，满足:
+\begin{equation}
+	\lim_{x \rightarrow a}f(x)=\lim_{x \rightarrow a}g(x)=0;\qquad\lim_{x \rightarrow a}\frac{f'(x)}{g'(x)}=l;\label{1}
+\end{equation}
+则必有：
+\begin{equation}
+	\lim_{x \rightarrow a}\frac{f(x)}{g(x)}=l.\label{2}
+\end{equation}
+
+(b)如果函数$f(x)$与函数$g(x)$在去心邻域$\tilde{B}_{\delta}(x)$内可导且$g(x)\ne0$恒成立，满足:
+\begin{equation}
+	\lim_{x \rightarrow a}g(x)=\infty;\qquad\lim_{x \rightarrow a}\frac{f'(x)}{g'(x)}=l;\label{3}
+\end{equation}
+则必有：
+\begin{equation}
+	\lim_{x \rightarrow a}\frac{f(x)}{g(x)}=l.\label{4}
+\end{equation}
+
+注：这里的$a,l$可为有限的或者$\infty$。
 \section{证明}
+\begin{proof}[证明]
+对于完整的证明而言，我们需要考虑4种极限过程：分别是$x \rightarrow a^-,x \rightarrow a^+,x \rightarrow -\infty,x \rightarrow +\infty$，这看上去十分复杂，但实际上，对于这4种极限过程，定理的证明是完全类似的，我们只需要对其中$x \rightarrow a^+$的情形详细地写出证明，并简要的叙述出其他3种情形下证明应作出的改动。
 
+我们将只对$\displaystyle \lim_{x \rightarrow a}\frac{f'(x)}{g'(x)}=l$为有限的情形进行证明，因为当$l=+\infty$或者$l=-\infty$时，证明同样是完全类似的。
 
+首先我们对(a)进行证明，由式\ref{1}与极限定义可知：对于$\forall\epsilon>0,\exists\delta>0$,当$x\in(a,a+\delta)$时，有：
+$$
+	l-\epsilon<\frac{f'(x)}{g'(x)}<l+\epsilon;
+$$
+因此对于任意子区间$(x,x_0)\subset(a,a+\delta)$,由Cauchy中值定理，必然$\exists\xi\in(x,x_0)$，使得：
+\begin{equation}
+	l-\epsilon<\frac{f(x)-f(x_0)}{g(x)-g(x_0)}=\frac{f'(\xi)}{g'(\xi)}<l+\epsilon;\label{5}
+\end{equation}
+通过恒等变形可以得到：
+$$
+\frac{f(x)-f(x_0)}{g(x)-g(x_0)}=\frac{\frac{f(x)}{g(x)}-\frac{f(x_0)}{g(x)}}{1-\frac{g(x_0)}{g(x)}};
+$$
+在上式中令$x_0\rightarrow a$，有$1-\displaystyle\frac{g(x_0)}{g(x)}\rightarrow 1$,从而我们得到：$\displaystyle\varlimsup_{x \rightarrow a^+}\frac{f(x)}{g(x)}\le l+\epsilon$.
+由$\epsilon$的任意性，我们得到$\displaystyle\varlimsup_{x \rightarrow a^+}\frac{f(x)}{g(x)}\le l$，同理有$\displaystyle\varliminf_{x \rightarrow a^+}\frac{f(x)}{g(x)}\ge l$.
+故由上述两式有式\ref{2}成立。
 
+接下来我们证明情形(b)，由恒等变形我们有:(这里$x$与$x_0$的定义与上述证明中的一致)
+\begin{equation}
+\begin{aligned}
+&\frac{f(x)}{g(x)}=\frac{f(x)-f(x_0)}{g(x)}+\frac{f(x_0)}{g(x)}\\
+&=\frac{g(x)-g(x_0)}{g(x)}\cdot\frac{f(x)-f(x_0)}{g(x)-g(x_0)}+\frac{f(x_0)}{g(x)}\\
+&=\left(1-\frac{g(x_0)}{g(x)}\right)\frac{f(x)-f(x_0)}{g(x)-g(x_0)}+\frac{f(x_0)}{g(x)}\nonumber
+\end{aligned}
+\end{equation}
+于是,我们有：
+\begin{equation}
+	\begin{aligned}
+		&\left|\frac{f(x)}{g(x)}-l\right|=\left|\left(1-\frac{g(x_0)}{g(x)}\right)\frac{f(x)-f(x_0)}{g(x)-g(x_0)}+\frac{f(x_0)}{g(x)}-l\right|\\
+		&\le\left|1-\frac{g(x_0)}{g(x)}\right|\cdot\left|\frac{f(x)-f(x_0)}{g(x)-g(x_0)}-l\right|+\left|\frac{f(x_0)-lg(x_0)}{g(x)}\right|\label{6}
+	\end{aligned}
+\end{equation}
+其中由Cauchy中值定理可得：(这里$\xi$的定义与上述证明中的一致)
+$$
+\left|\frac{f(x)-f(x_0)}{g(x)-g(x_0)}-l\right|=\left|\frac{f'(\xi)}{g'(\xi)}-l\right|<\epsilon
+$$
+结合式\ref{3}可知当$x$趋于$a$时，有$\displaystyle\left|1-\frac{g(x_0)}{g(x)}\right|$小于常数，且$\displaystyle\left|\frac{f(x)-f(x_0)}{g(x)-g(x_0)}-l\right|$趋于$0$，又$\displaystyle\left|\frac{f(x_0)-lg(x_0)}{g(x)}\right|$的分母趋于$\infty$,分子是固定的，所以也趋于$0$。
+综上所述有：
+\begin{equation}
+	\lim_{x \rightarrow a}\frac{f(x)}{g(x)}=l=\lim_{x \rightarrow a^+}\frac{f'(x)}{g'(x)}\nonumber
+\end{equation}
+即式\ref{4}成立。
 
-
+注：在其余的3种情形中，只需要更改$x,x_0$的取值范围即可完成类似的完成证明。
+\end{proof}
 \end{document}
