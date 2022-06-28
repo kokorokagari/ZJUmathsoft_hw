@@ -1,0 +1,22 @@
+#!/bin/sh
+yes_or_no() {
+	echo "你的名字是 $* 吗 ?"
+	while true #这里的"true"可以用"："代替
+	do
+	echo -n "请输入 yes 或者 no: "
+	read x
+	case "$x" in
+	y | yes | Y | Yes) return 0;;
+	[Nn]* ) return 1;;
+	* ) echo "请回答 yes 或者 no！"
+	esac
+	done
+}
+echo "这个程序的用户有 $*"
+if yes_or_no "$1"
+then
+echo "你好呀 $1, 真是个好名字～"
+else
+echo "打扰了～"
+fi
+exit 0

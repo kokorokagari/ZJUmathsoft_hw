@@ -1,0 +1,15 @@
+#!/bin/sh
+echo "这菜都齐了怎么都不吃啊？"
+read timeofday
+
+if [ $timeofday = "yes" ]
+then
+echo "nnd，给我玩indi是吧，直接来罢。"
+elif [ $timeofday = "no" ]; then
+echo "我不打扰，我先走了哈。"
+else
+echo "$timeofday是什么意思，机器也是不能糊弄的哦～"
+exit 1
+fi
+
+exit 0

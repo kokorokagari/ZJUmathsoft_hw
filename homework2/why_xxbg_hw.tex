@@ -1,0 +1,150 @@
+%!Tex Program = xelatex
+%\documentclass[a4paper]{article}
+\documentclass[a4paper]{ctexart}
+\usepackage{xltxtra}
+%\setmainfont[Mapping=tex-text]{AR PL UMing CN:style=Light}
+%\setmainfont[Mapping=tex-text]{AR PL UKai CN:style=Book}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei:style=Regular}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Sharp:style=Regular}
+%\setmainfont[Mapping=tex-text]{AR PL KaitiM GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{AR PL SungtiL GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Mono:style=Regula}
+
+\title{作业二：Shell脚本的测试结果}
+\author{吴泓鹰\\数学与应用数学(强基计划)\qquad3210101890}
+\date{2022年6月28日}
+
+\begin{document}
+\maketitle
+
+\section{Shell脚本的源码与测试}
+在源码的编写上，我以教材\footnote{N. Matthew and R. Stones, Beginning Linux Programming,
+	4th Edition, Wiley Publishing, Inc.,
+	Indianapolis, 2008.
+}上第40页的
+\begin{verbatim}
+	Try It Out Case IIl: Executing Multiple Statements
+\end{verbatim}
+为模板，进行了简单的本地化改动得到了本报告所展示的Shell脚本。
+\subsection{源码展示}
+\begin{verbatim}
+	#!/bin/sh
+	yes_or_no() {
+		echo "你的名字是 $* 吗 ?"
+		while true #这里的"true"可以用"："代替
+		do
+		echo -n "请输入 yes 或者 no: "
+		read x
+		case "$x" in
+		y | yes | Y | Yes) return 0;;
+		[Nn]* ) return 1;;
+		* ) echo "请回答 yes 或者 no！"
+		esac
+		done
+	}
+	echo "这个程序的用户有 $*"
+	if yes_or_no "$1"
+	then
+	echo "你好呀 $1, 真是个好名字～"
+	else
+	echo "打扰了～"
+	fi
+	exit 0
+\end{verbatim}
+\subsection{测试结果}
+(a)输入：
+\begin{verbatim}
+	./shell_hw why yhw
+	Y
+\end{verbatim}
+输出：
+\begin{verbatim}
+	why@why-virtual-machine:~/mathsoft/homework2$ ./shell_hw why yhw
+	这个程序的用户有 why yhw
+	你的名字是 why 吗 ?
+	请输入 yes 或者 no: Y
+	你好呀 why, 真是个好名字～
+\end{verbatim}
+
+(b)输入：
+\begin{verbatim}
+	./shell_hw why
+	Noooo!
+\end{verbatim}
+输出：
+\begin{verbatim}
+	why@why-virtual-machine:~/mathsoft/homework2$ ./shell_hw why
+	这个程序的用户有 why
+	你的名字是 why 吗 ?
+	请输入 yes 或者 no: Noooo! 
+	打扰了～
+\end{verbatim}
+
+(c)输入：
+\begin{verbatim}
+	/shell_hw why yhw
+	?
+	...
+	爬
+	nanodesu
+\end{verbatim}
+输出：
+\begin{verbatim}
+	why@why-virtual-machine:~/mathsoft/homework2$ ./shell_hw why yhw
+	这个程序的用户有 why yhw
+	你的名字是 why 吗 ?
+	请输入 yes 或者 no: ?
+	请回答 yes 或者 no！
+	请输入 yes 或者 no: ...
+	请回答 yes 或者 no！
+	请输入 yes 或者 no: 爬
+	请回答 yes 或者 no！
+	请输入 yes 或者 no: nanodesu
+	打扰了～
+\end{verbatim}
+\section{Shell脚本的解析与学习}
+在这一部分，我将对上述脚本的源码与输出结果进行解析，从而展示我在今天的课堂与课外中所学习到的有关Shell脚本的内容。
+\subsection{源码与输出结果的解析}
+{\bf 我们从将对源码上往下进行解析：}
+\begin{itemize}
+\item 在源码中的第一行与第四行都使用到了\verb|#|,但实际上他们的功能并不相同;第一行中\verb|#!/bin/sh|是一种特殊的注释，\verb|#!|告诉了系统应该执行\verb|/bin/sh|这个Shell程序;而第四行中的\verb|#|仅仅是告诉系统其后的内容属于注释，不需要执行。
+\item 第二行中的\verb|yes_or_no(){...}|是一个函数，它可以被后面的程序所调用执行\verb|{...}|中的内容。
+\item 源码中的\verb|echo|可以用于输出其后的变量内容（需要在变量名前加上\verb|$|）或者字符串，在\verb|echo|后加上\verb|-n|可以使输出后不自动换行。
+\item while循环语句
+\begin{verbatim}
+	while 循环条件 do
+	循环内容
+	done
+\end{verbatim}
+正如上述代码展示的一样，在满足循环条件的情况下重复的执行循环内容;在源码中，条件\verb|true|即验证返回值是否为真，其中的\verb|return 0|表明返回值为假，\verb|return 1|表明返回值为真。
+\item 源码中的\verb|read|可以用于读取用户所输入的一个字符串。
+\item case条件语句
+\begin{verbatim}
+	case 变量 in
+	条件 ) 执行内容;;
+	条件 ) 执行内容;;
+	...
+	esac
+\end{verbatim}
+正如上述代码展示的一样，从上到下依次对变量验证条件，在变量满足条件的时候执行其后的内容，注意：这里的两个双引号\verb|;;|是必要的。
+\item if条件语句
+\begin{verbatim}
+	if 条件
+	then
+		内容1
+	else
+		内容2
+	fi
+\end{verbatim}
+正如上述代码展示的一样，验证条件是否成立，是则输出内容1,否则输出内容2。
+\item 源码中的\verb|exit|将确保脚本返回一个有意义的退出码，一般而言退出码0表示程序成功运行，其他退出码则会有不同的含义。
+\end{itemize}
+
+{\bf 对测试结果的分析：}
+\begin{itemize}
+\item 注意到我们在执行文件\verb|./shell_hw|后加入了字符\verb|why|与\verb|yhw|,这将在脚本中作为参数变量出现，即源码中出现的\verb|$*,$1|，它们分别表示脚本程序的所有参数与第一个参数，因此在测试结果(a)中分别出现了\verb|why yhw|于\verb|why|。
+\item 在测试结果(b)与(c)中我们发现输入\verb|Noooo!,nanodesu|也能输出，这是因为\verb|[]*|可以将只要包含方括号中内容的输入识别为条件成立。
+\end{itemize}
+
+\end{document}
+

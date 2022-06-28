@@ -1,0 +1,5 @@
+#!/bin/sh
+for file in $(ls *.pdf); do
+lpr $file
+done
+exit 0
