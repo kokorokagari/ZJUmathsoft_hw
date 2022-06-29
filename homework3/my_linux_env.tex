@@ -1,0 +1,89 @@
+%!Tex Program = xelatex
+%\documentclass[a4paper]{article}
+\documentclass[a4paper]{ctexart}
+\usepackage{xltxtra}
+\usepackage{url}
+\usepackage{hyperref}
+%\setmainfont[Mapping=tex-text]{AR PL UMing CN:style=Light}
+%\setmainfont[Mapping=tex-text]{AR PL UKai CN:style=Book}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei:style=Regular}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Sharp:style=Regular}
+%\setmainfont[Mapping=tex-text]{AR PL KaitiM GB:style=Regular}
+%\setmainfont[Mapping=tex-text]{AR PL SungtiL GB:style=Regular}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Mono:style=Regular}
+\hypersetup{colorlinks=true,linkcolor=black}
+
+\title{作业三：我的linux工作环境}
+\author{吴泓鹰\\数学与应用数学(强基计划)\qquad 3210101890}
+
+\begin{document}
+\maketitle
+Linux系统作为一个切实可行的操作系统，其作为一个类UNIX的内核实现，具有{\bf 简单性、集中性、可重用组件、过滤器、开放的文件格式、灵活性}等特点\cite{linux_book},因此到了今天也依旧是我们学习与工作的良好选择。因此，我通过学习书籍与查找网页资料\cite{linux_book}\cite{linux_cainiao},搭建了一个属于自己的Linux工作环境，并在此进行简单介绍。
+\section{Linux系统的安装}
+作为一名大一新生，在学习该门短学期课程之前一直使用的是Windows操作系统，因此我需要在原有的Windows系统的基础上安装Linux系统，通过查询资料\cite{linux_anz}了解到可以通过使用双系统(WSL\footnote{适用于 Linux 的 Windows 子系统可让开发人员按原样运行 GNU/Linux 环境 - 包括大多数命令行工具、实用工具和应用程序 - 且不会产生传统虚拟机或双启动设置开销。})或者虚拟机进行Linux系统的安装，处于本人的水平考虑，我选择了使用虚拟机安装Linux系统。
+\subsection{使用虚拟机安装Linux系统}\label{1.1}
+通过查询资料\cite{linux_ubuntu},虚拟机方面，我选择了使用VMware Workstation 16 Pro进行Linux系统的安装，并且使用了Ubuntu 22.04作为桌面系统,对其进行了如下的具体设置：
+
+\begin{tabular}{l|l}
+	\hline
+	设备 & 摘要\\
+	\hline
+	内存 & 4 GB \\
+	处理器 & 2 \\
+	硬盘(SCSI) & 40 GB,拆分 \\
+	网络适配器 & NAT \\
+	其他设备 & CD/DVD,声卡 \\
+	\hline
+\end{tabular}
+\subsection{Linux发行版名称与版本号}
+在键盘上同时按下\verb|CTRL+ALT+T|打开终端页面，在其中输入\verb|lsb_release -a|命令即可得到Linux发行版名称与版本号，输出如下：
+\begin{verbatim}
+	No LSB modules are available.
+	Distributor ID:	Ubuntu
+	Description:	Ubuntu 22.04 LTS
+	Release:	22.04
+	Codename:	jammy
+\end{verbatim}
+\section{系统调整、软件安装与配置工作}
+为了更好地使用Linux系统，需要对它的工作环境进行一定的配置与调整，通过查找资料\cite{linux_ubuntu}\cite{linux_set}，我对其进行了以下配置与调整。
+\subsection{系统调整}
+正如\ref{1.1}中所展示的那样，我只对系统硬件进行了一些调整（如删除打印机、USB接口，修改内存大小等），并未进行更为深入的系统调整。
+\subsection{软件安装}
+为了更为方便以及个人需要方面的考虑，我安装了以下软件进行使用：
+\begin{itemize}
+	\item 输入法：Fcitx 4键盘输入法系统，Google输入法
+	\item 编译器：gcc,g++
+	\item 编译(安装)工具：make,cmake,automake
+	\item 编辑器 emacs,vim,gedit,TeXstudio
+	\item 文档工具：texlive,doxygen
+	\item 数字计算处理包：libboost,trilinos
+	\item 后处理：dx
+	\item 源代码管理：git
+	\item 远程管理：ssh,vnc-server,x11vnc
+	\item 软件管理：Synaptic
+	\item 浏览器：Chrome
+	\item 桌面管理：GNOME-Tweaks
+	\item pdf阅读器：Okular
+\end{itemize}
+\subsection{配置工作}
+整体而言，我主要对{\bf git，vim以及软件源}的配置进行了如下的修改：
+\begin{enumerate}
+	\item 配置了git的全局配置，包括用户\verb|[user]|与代理\verb|[http][https]|，并且使用了ssh密钥来方便源代码的\verb|push|与\verb|clone|。
+	\item 在用户目录\verb|~\|下添加了配置文件\verb|.vimrc|以增加自己的学习与工作效率(具体配置见参考文献\cite{linux_set})
+	\item 在应用“软件与更新”中修改了软件源为\url{http://mirrors.huaweicloud.com/repository/ubuntu}
+\end{enumerate}
+\section{对下一步工作的规划}
+
+\subsection{未来半年内可能的Linux使用场合}
+数学专业课程{\bf 数据结构与算法}，使用{\bf \LaTeX}编写数学相关文档，使用{\bf 终端}更为方便地进行文件处理相关的事项。
+\subsection{对目前工作环境的分析与改动计划}
+就目前而言，我仍对自己的工作环境的整体情况不够了解，仍需要更多的学习与实践，无法给出有效的工作环境分析与改动计划。
+\section{工作结果稳定与安全的保障}
+众所周知，文件、文档、源代码等都是我们重要的工作结果，一旦缺失或者丢失将会造成难以预计的后果，以至于对我们的工作与生活造成巨大影响。因此，保障我们工作成功的稳定与安全就十分必要了。
+
+一般而言，我会使用git进行源代码管理并将代码上传至{\bf github}，从而在云端保存好自己的源代码;而对于相对体积较大的文档而已，我会选择使用{\bf 坚果云}(\url{https://www.jianguoyun.com/})来保存自己的重要文档，以免丢失。
+
+\bibliographystyle{plain}
+\bibliography{my_linux_env.bib}
+
+\end{document}

@@ -1,0 +1,32 @@
+\begin{thebibliography}{1}
+
+\bibitem{linux_cainiao}
+Linux 教程.
+\newblock [EB/OL].
+\newblock \url{https://www.runoob.com/linux/linux-tutorial.html}.
+
+\bibitem{linux_book}
+Neil Matthew and Richard Stones.
+\newblock {\em Beginning linux programming}.
+\newblock John Wiley \& Sons, 2008.
+
+\bibitem{linux_anz}
+sunshine1\_彤.
+\newblock Linux从0到1：安装linux操作系统（超级详细版）.
+\newblock [EB/OL].
+\newblock \url{https://blog.csdn.net/sunshine1\_0/article/details/80839430}.
+
+\bibitem{linux_ubuntu}
+XLevon.
+\newblock [linux os]ubuntu22.04的日常开发环境配置.
+\newblock [EB/OL].
+\newblock
+  \url{https://blog.csdn.net/XLevon/article/details/124681970?spm=1001.2014.3001.5502}.
+
+\bibitem{linux_set}
+镖叔.
+\newblock Vim的强大配置文件（一键配置）.
+\newblock [EB/OL].
+\newblock \url{https://blog.csdn.net/u010871058/article/details/54253774/}.
+
+\end{thebibliography}
