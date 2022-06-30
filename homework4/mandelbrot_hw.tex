@@ -5,10 +5,13 @@
 \usepackage{xltxtra}
 \usepackage[utf8]{inputenc}%我也不知道有啥用
 \usepackage{amsmath}
-\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{graphicx, subfig}
 \usepackage{ctex}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
+\usepackage{float}
+\usepackage[T1]{fontenc}%不知道有啥用
+\usepackage{textcomp}%不知道有啥用
 \usepackage{url}
 \usepackage{hyperref}
 
@@ -66,11 +69,12 @@
 \maketitle	
 
 \begin{abstract}
+	本文通过分析Mandelbrot Set的数学理论，使用Python程序实现生成不同条件下的Mandelbrot Set图像的程序，探索得到Mandelbrot Set在数学中的奇特与美丽之处。\\
 	%\centering%使得关键字居中
 	\textbf{关键词:}Mandelbrot Set,Python
 \end{abstract}	
 
-Mandelbrot Set是什么东西呢？Mandelbrot Set相信大家都很(并不)熟悉，但是Mandelbrot Set到底是什么东西呢，下面就让小编带大家一起了解吧。
+Mandelbrot Set是什么东西呢？Mandelbrot Set相信大家都很(并不)熟悉，但是Mandelbrot Set到底是什么东西呢，下面就让小编带大家一起了解吧。\footnote{使用\href{https://www.pslkzs.com/feihua/feihua.php}{灰太废话生成器}生成}
 
 \section{问题背景}
 Mandelbrot Set是一个几何图形，曾被称为“上帝的指纹”。 这个点集均出自公式$z_{n+1}={z_n}^2+c$，对于非线性迭代公式$z_{n+1}={z_n}^2+c$，所有使得无限迭代后的结果能保持有限数值的复数$z$的集合(也称该迭代函数的Julia集)连通的$c$，构成Mandelbrot Set。它是Mandelbrot教授在二十世纪七十年代发现的。\cite{mandelbrotsetbaidu}
@@ -80,16 +84,108 @@ Mandelbrot Set是一个几何图形，曾被称为“上帝的指纹”。 这�
 这引出了迭代理论涉及的重要问题之一：典型迭代轨迹的运动趋势如何？收敛还是发散？周期循环还是毫无规律可言？Mandelbrot Set对此问题做了图形式的解答。\cite{mandelbrotsetzhihu}
 
 \section{生成与探索}
-在本节我们将介绍Mandelbrot Set生成的数学力量，并且使用迭代算法对Mandelbrot Set进行绘制，得到其在不同条件下的.png图片。具体而言，我将使用Python进行编程以实现以上要求(源代码见\href{run:./code/py/mandelbrot.txt}{mandelbrot.txt})\cite{mandelbrotsetpython}。
+在本节我们将介绍Mandelbrot Set生成的数学理论，并且使用迭代算法对Mandelbrot Set进行绘制，得到其在不同条件下的.png图片。具体而言，我将使用Python进行编程以实现以上要求(源代码见\href{run:./code/py/mandelbrot.txt}{mandelbrot.txt})\cite{mandelbrotsetpython}。
+
 \subsection{数学理论}
+Mandelbrot Set的简略定义如下：
+
+我们将Mandelbrot Set记为集合$M$，其复元素$c\in \mathbb{C}$满足：多项式$P(z)=z^2+c$从初值(critical point)$z=0$迭代产生的轨迹(orbit)不趋于无穷大。\cite{mandelbrotsetwiki}
+
+这样的定义是有效的(significant)，这是因为：
+\begin{itemize}
+	\item $P$的Julia集是连通的当且进当$c\in M$。
+	\item 当且仅当$c\in \partial M$时，动力系统$z\mapsto P(z)$在$P$的扰动下是稳定的，其中$\partial$是拓扑边界的符号。
+\end{itemize}
 
 \subsection{基本算法}
+我们将从$z_0$出发由$z\mapsto P(z)$迭代产生的轨迹趋于无穷定义为其与$z_0$的差的模长大于某个收敛半径$R$，这里的一般取$R=2$。
 
+关于迭代过程的伪代码如下所示：
+\begin{lstlisting}
+选择迭代次数N，迭代半径R，初值z0
+选择生成的图片的系数：
+	坐标系的长宽ab，原点位置默认为坐标系中心
+	图片中每个像素所占据的坐标系的长宽step
+对于图中的每一个像素p：
+	令p对应复平面上的复数c
+	令z为一复变量
+	设置z为给定的初值z0
+	将以下过程执行N次：
+		若|z-z0|>R则对z返回某个值f(i，z)
+		否则用z*z+c代替z
+	若该过程自然结束，对z返回某个值f(N,z)
+	根据每个像素p的值产生相应的颜色
+选择dpi，生成.png图片
+\end{lstlisting}
+
+通过插入Python库\verb|numpy|与\verb|matplotlib|,即可使用Python语言写出如上所示的伪代码，再添加一些细节，就能得到我们所需的图片。
 \subsection{数值算例}
+以下的所有数值算例均为使用\verb|matplotlib|库中\verb|imshow|函数生成。设置的部分参数为:
 
+\begin{table}[htbp]
+\caption{部分代码参数}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	$a$ & $b$ & $step$ & $R$ & $z_0$ & $dpi$ \\
+	\hline
+	$3.0$ & $3.0$ & $0.001$ & $2$ & $0.75+0i$ & $600$ \\
+	\hline 
+\end{tabular}
+\end{table}
+\begin{enumerate}
+	\item 令$f(N,z)=1,f(n,z)=0(n<N)$，再分别取$N=10,20,50,100$：
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=.45\textwidth]{./png/man_normal_n10.png}
+		\includegraphics[width=.45\textwidth]{./png/man_normal_n20.png}
+		\includegraphics[width=.45\textwidth]{./png/man_normal_n50.png}
+		\includegraphics[width=.45\textwidth]{./png/man_normal_n100.png}
+		\caption{$N=10,20,50,100$，只对最后一次迭代上色}
+		\label{normal}
+	\end{figure}
+
+开始使$f$的值与$n$产生联系。
+\item 令$f(n,z)=n$，再分别取$N=10,20,50,100$:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.45\textwidth]{./png/man_complex_n10.png}
+	\includegraphics[width=.45\textwidth]{./png/man_complex_n20.png}
+	\includegraphics[width=.45\textwidth]{./png/man_complex_n50.png}
+	\includegraphics[width=.45\textwidth]{./png/man_complex_n100.png}
+	\caption{$N=10,20,50,100$，每迭代一次颜色加深一点}
+	\label{complex}
+\end{figure}
+\item 在类似\ref{complex}的情形下把灰度图改为黑白相间图($f(n,z)=(-1)^i$)和彩图：
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.45\textwidth]{./png/man_amazing_n100.png}
+	\includegraphics[width=.45\textwidth]{./png/man_color_n100.png}
+	\caption{$N=100$，每迭代一次颜色反转或变化一点(线性)}
+	\label{color}
+\end{figure}
+
+在以下的情形4，5中将会使$f$的值还与$z$产生关联，使得生成的图片具有更为特别的样式。
+\item 令$f(n,z)=\ln(n)$与$\displaystyle f(n,z)=\frac{\ln(|z|)}{2^n}$:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.45\textwidth]{./png/man_colorln_n100.png}
+	\includegraphics[width=.45\textwidth]{./png/man_colorlnx5-2_n100.png}
+	\caption{$N=100$，每迭代一次颜色变化一点(对数)}
+	\label{colorln}
+\end{figure}
+\item 令$f(n,z)=\sin(n)$与$\displaystyle f(n,z)=\sin(\ln|z|)$:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.45\textwidth]{./png/man_colorsin_n100.png}
+	\includegraphics[width=.45\textwidth]{./png/man_colorsinlnx_n100.png}
+	\caption{$N=100$，每迭代一次颜色变化一点(三角函数)}
+	\label{colorsin}
+\end{figure}
+\end{enumerate}
 \section{结论与思考}
-	
-	
+通过以上的图像生成与探索的过程，我认识到了Mandelbrot Set的奇特与美妙之处。也使得我更为深入的思考，再继续改变函数$f(n,z)$，又会生成什么样的图形呢？我相信这件事值得我更进一步地查找资料与深入探索，并从中探索出更为美丽的数学世界。
+\clearpage
 	
 \bibliographystyle{plain}
 \bibliography{mandelbrot.bib}

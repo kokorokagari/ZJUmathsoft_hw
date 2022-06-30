@@ -1,7 +1,25 @@
 %!Tex Program = xelatex
 %\documentclass[a4paper]{article}
-\documentclass[a4paper]{ctexart}
+\documentclass[UTF8]{ctexart}
 \usepackage{xltxtra}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+	basicstyle=\ttfamily,
+	numbers=left, 
+	numberstyle= \tiny, 
+	keywordstyle= \color{ blue!70},
+	commentstyle= \color{red!50!green!50!blue!50}, 
+	frame=shadowbox, 
+	rulesepcolor= \color{ red!20!green!20!blue!20} ,
+	escapeinside=``, 
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
+	framexleftmargin=2em
+}
 %\setmainfont[Mapping=tex-text]{AR PL UMing CN:style=Light}
 %\setmainfont[Mapping=tex-text]{AR PL UKai CN:style=Book}
 %\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei:style=Regular}
@@ -27,30 +45,30 @@
 \end{verbatim}
 为模板，进行了简单的本地化改动得到了本报告所展示的Shell脚本。
 \subsection{源码展示}
-\begin{verbatim}
-	#!/bin/sh
-	yes_or_no() {
-		echo "你的名字是 $* 吗 ?"
-		while true #这里的"true"可以用"："代替
-		do
-		echo -n "请输入 yes 或者 no: "
-		read x
-		case "$x" in
-		y | yes | Y | Yes) return 0;;
-		[Nn]* ) return 1;;
-		* ) echo "请回答 yes 或者 no！"
-		esac
-		done
-	}
-	echo "这个程序的用户有 $*"
-	if yes_or_no "$1"
-	then
-	echo "你好呀 $1, 真是个好名字～"
-	else
-	echo "打扰了～"
-	fi
-	exit 0
-\end{verbatim}
+\begin{lstlisting}[language=bash]
+#!/bin/sh
+yes_or_no() {
+	echo "你的名字是 $* 吗 ?"
+	while true #这里的"true"可以用"："代替
+	do
+	echo -n "请输入 yes 或者 no: "
+	read x
+	case "$x" in
+	y | yes | Y | Yes) return 0;;
+	[Nn]* ) return 1;;
+	* ) echo "请回答 yes 或者 no！"
+	esac
+	done
+}
+echo "这个程序的用户有 $*"
+if yes_or_no "$1"
+then
+echo "你好呀 $1, 真是个好名字～"
+else
+echo "打扰了～"
+fi
+exit 0
+\end{lstlisting}
 \subsection{测试结果}
 (a)输入：
 \begin{verbatim}

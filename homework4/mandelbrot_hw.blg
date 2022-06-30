@@ -3,44 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: mandelbrot_hw.aux
 The style file: plain.bst
 Database file #1: mandelbrot.bib
-You've used 3 entries,
+Warning--to sort, need author or key in mandelbrotsetwiki
+You've used 4 entries,
             2118 wiz_defined-function locations,
-            510 strings with 4417 characters,
-and the built_in function-call counts, 659 in all, are:
-= -- 63
-> -- 21
+            512 strings with 4526 characters,
+and the built_in function-call counts, 827 in all, are:
+= -- 80
+> -- 22
 < -- 0
-+ -- 9
++ -- 10
 - -- 6
-* -- 17
-:= -- 117
-add.period$ -- 12
-call.type$ -- 3
-change.case$ -- 12
+* -- 22
+:= -- 136
+add.period$ -- 15
+call.type$ -- 4
+change.case$ -- 15
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 21
-empty$ -- 67
+cite$ -- 5
+duplicate$ -- 28
+empty$ -- 90
 format.name$ -- 6
-if$ -- 142
+if$ -- 184
 int.to.chr$ -- 0
-int.to.str$ -- 3
+int.to.str$ -- 4
 missing$ -- 0
-newline$ -- 21
+newline$ -- 26
 num.names$ -- 6
-pop$ -- 30
+pop$ -- 40
 preamble$ -- 1
-purify$ -- 9
+purify$ -- 11
 quote$ -- 0
-skip$ -- 15
+skip$ -- 20
 stack$ -- 0
-substring$ -- 15
-swap$ -- 3
+substring$ -- 20
+swap$ -- 4
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
-warning$ -- 0
+type$ -- 16
+warning$ -- 1
 while$ -- 6
-width$ -- 4
-write$ -- 35
+width$ -- 5
+write$ -- 44
+(There was 1 warning)

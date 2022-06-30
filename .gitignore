@@ -1,0 +1,7 @@
+*.zip
+#Letax
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
