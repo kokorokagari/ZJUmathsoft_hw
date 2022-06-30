@@ -1,0 +1,97 @@
+%!Tex Program = xelatex
+%\documentclass[a4paper]{article}
+\documentclass[a4paper]{ctexart}
+
+\usepackage{xltxtra}
+\usepackage[utf8]{inputenc}%我也不知道有啥用
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{ctex}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Python,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,%设置行号位置none不显示行号
+	%numberstyle=\tiny\courier, %设置行号大小
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	escapeinside=``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+	tabsize=4,
+	extendedchars=false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+
+\hypersetup{hypertex=true,
+	colorlinks=true,
+	linkcolor=blue,
+	anchorcolor=blue,
+	citecolor=blue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%\setmainfont[Mapping=tex-text]{AR PL UMing CN:style=Light}
+%\setmainfont[Mapping=tex-text]{AR PL UKai CN:style=Book}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei:style=Regular}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Sharp:style=Regular}
+%\setmainfont[Mapping=tex-text]{AR PL KaitiM GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{AR PL SungtiL GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Mono:style=Regula}
+
+\author{吴泓鹰\\数学与应用数学(强基计划)\quad3210101890}
+\title{Mandelbrot Set的生成和探索}
+%\date{}
+
+\begin{document}
+\maketitle	
+
+\begin{abstract}
+	%\centering%使得关键字居中
+	\textbf{关键词:}Mandelbrot Set,Python
+\end{abstract}	
+
+Mandelbrot Set是什么东西呢？Mandelbrot Set相信大家都很(并不)熟悉，但是Mandelbrot Set到底是什么东西呢，下面就让小编带大家一起了解吧。
+
+\section{问题背景}
+Mandelbrot Set是一个几何图形，曾被称为“上帝的指纹”。 这个点集均出自公式$z_{n+1}={z_n}^2+c$，对于非线性迭代公式$z_{n+1}={z_n}^2+c$，所有使得无限迭代后的结果能保持有限数值的复数$z$的集合(也称该迭代函数的Julia集)连通的$c$，构成Mandelbrot Set。它是Mandelbrot教授在二十世纪七十年代发现的。\cite{mandelbrotsetbaidu}
+
+迭代函数理论源于现实问题。种群增长的建模就是个例子。种群的当前规模决定了一个繁殖周期之后的规模。因此，种群增长的数学模型可以用一个包含自变量$x$的函数进行描述。$x$代表当前种群规模，$f(x)$代表一个繁殖周期后的期望种群规模。要想算出多个繁殖周期后的种群规模，就需要迭代该函数。由此，生活实践引发了人们对迭代理论的研究。
+
+这引出了迭代理论涉及的重要问题之一：典型迭代轨迹的运动趋势如何？收敛还是发散？周期循环还是毫无规律可言？Mandelbrot Set对此问题做了图形式的解答。\cite{mandelbrotsetzhihu}
+
+\section{生成与探索}
+在本节我们将介绍Mandelbrot Set生成的数学力量，并且使用迭代算法对Mandelbrot Set进行绘制，得到其在不同条件下的.png图片。具体而言，我将使用Python进行编程以实现以上要求(源代码见\href{run:./code/py/mandelbrot.txt}{mandelbrot.txt})\cite{mandelbrotsetpython}。
+\subsection{数学理论}
+
+\subsection{基本算法}
+
+\subsection{数值算例}
+
+\section{结论与思考}
+	
+	
+	
+\bibliographystyle{plain}
+\bibliography{mandelbrot.bib}
+	
+\end{document}
