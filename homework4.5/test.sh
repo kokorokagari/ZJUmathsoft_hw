@@ -1,5 +1,6 @@
 #!/bin/sh
 #为了使图片生成地更快，调整了Python代码的图片参数使得文件大小不至于过大，代价是损失了一定的精细度。
+#需要用到ipython3以及numpy库、matplotlib库。
 rm -rf png
 #find ./ -regextype posix-extended -regex ".*\.(aux|blg|log|bbl|out|pdf)" -type f -exec rm -f {} \;
 mkdir png
