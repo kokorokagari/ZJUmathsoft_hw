@@ -1,0 +1,71 @@
+%!Tex Program = xelatex
+%\documentclass[a4paper]{article}
+\documentclass[a4paper]{ctexart}
+
+\usepackage[utf8]{inputenc}%告诉 LaTeX TeX文档的输入（文件）编码（为utf-8）
+\usepackage{amsmath}%数学公式相关
+\usepackage{amssymb}%更多的数学符号
+\usepackage{caption}%控制题目/说明文字的样式
+\usepackage{graphicx, subfig}%插入图片
+\usepackage{ctex}%中文宏包
+\usepackage{float}%强行保留图片位置用
+%\usepackage[T1]{fontenc}%可以调用各种编码字体，并可有多重选项，其中最后的选项将成为系统默认编码
+%\usepackage{textcomp}%提供了许多 TS1 编码的可直接在文本中使用的常见数理单位和货币符号
+\usepackage{url}%插入网址
+\usepackage{hyperref}%超链接
+
+\usepackage{listings}%更好看的代码
+\usepackage{xltxtra}%listings中文支持
+\usepackage{color}%listings字体颜色相关
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,%listings代码区各种设置
+	language=Python,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,%设置行号位置none不显示行号
+	%numberstyle=\tiny\courier, %设置行号大小
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	escapeinside=``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+	tabsize=4,
+	extendedchars=false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+
+\hypersetup{hypertex=true,%超链接设置
+	colorlinks=true,
+	linkcolor=blue,
+	anchorcolor=blue,
+	citecolor=blue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%\setmainfont[Mapping=tex-text]{AR PL UMing CN:style=Light}
+%\setmainfont[Mapping=tex-text]{AR PL UKai CN:style=Book}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei:style=Regular}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Sharp:style=Regular}
+%\setmainfont[Mapping=tex-text]{AR PL KaitiM GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{AR PL SungtiL GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Mono:style=Regula}
+
+\author{吴泓鹰\\数学与应用数学(强基计划)\quad3210101890}
+\title{\textbf{gsl Example:}\\ \texttt{roots.c}的功能分析}
+%\date{}
+
+\begin{document}
+\maketitle
+
+\end{document}	
