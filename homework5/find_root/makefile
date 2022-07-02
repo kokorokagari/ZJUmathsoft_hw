@@ -14,11 +14,14 @@ lib/libdemo_fn.so:src/demo_fn.c include/demo_fn.h
 
 .PHONY:clean
 clean:
-	rm lib/libdemo_fn.so bin/roots
+	rm lib/libdemo_fn.so bin/roots report.pdf
 
 report:
 	xelatex doc/report.tex
-	find doc/ -regextype posix-extended -regex ".*\.(aux|blg|log|bbl|out)" -type f -exec rm -f {} \;
+	#bibtex doc/report.aux
+	#xelatex doc/report.tex
+	#xelatex doc/report.tex
+	find . -regextype posix-extended -regex ".*\.(aux|blg|log|bbl|out)" -type f -exec rm -f {} \;
 
 #all:
 

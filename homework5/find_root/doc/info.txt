@@ -1,0 +1,6 @@
+1.由于个人能力原因，本人将gsl中bin文件夹、include文件夹以及lib文件夹中的所有内容均复制粘贴到了roots_find文件夹中，以保证makefile文件能够顺利执行。
+2.log文件夹中make.log,make_check.log,make_install.log,make_installcheck.log分别是在终端执行make,make check,make install,make installcheck后得到的文件。
+命令说明：
+make：在./bin目录下生成可执行文件roots;
+make clean：删除report.pdf,roots,libdemo_fn.so；
+make report：在./目录下生成report.pdf，并且删除中间文件。
