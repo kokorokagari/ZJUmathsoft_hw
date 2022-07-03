@@ -1,0 +1,136 @@
+%!Tex Program = xelatex
+%\documentclass[a4paper]{article}
+\documentclass[a4paper]{ctexart}
+
+\usepackage[utf8]{inputenc}%告诉 LaTeX TeX文档的输入（文件）编码（为utf-8）
+\usepackage{amsmath}%数学公式相关
+\usepackage{amssymb}%更多的数学符号
+\usepackage{caption}%控制题目/说明文字的样式
+\usepackage{graphicx, subfig}%插入图片
+\usepackage{ctex}%中文宏包
+\usepackage{float}%强行保留图片位置用
+%\usepackage[T1]{fontenc}%可以调用各种编码字体，并可有多重选项，其中最后的选项将成为系统默认编码
+%\usepackage{textcomp}%提供了许多 TS1 编码的可直接在文本中使用的常见数理单位和货币符号
+\usepackage{url}%插入网址
+\usepackage{hyperref}%超链接
+
+\usepackage{tikz}%TiKZ绘图
+\usetikzlibrary{arrows,shapes,chains}
+\usetikzlibrary{graphs, positioning, quotes, shapes.geometric}
+\usepackage{array}
+
+\usepackage{listings}%更好看的代码
+\usepackage{xltxtra}%listings中文支持
+\usepackage{color}%listings字体颜色相关
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,%listings代码区各种设置
+	language=Python,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,%设置行号位置none不显示行号
+	%numberstyle=\tiny\courier, %设置行号大小
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	escapeinside=``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+	tabsize=4,
+	extendedchars=false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+
+\hypersetup{hypertex=true,%超链接设置
+	colorlinks=true,
+	linkcolor=blue,
+	anchorcolor=blue,
+	citecolor=blue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%\setmainfont[Mapping=tex-text]{AR PL UMing CN:style=Light}
+%\setmainfont[Mapping=tex-text]{AR PL UKai CN:style=Book}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei:style=Regular}
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Sharp:style=Regular}
+%\setmainfont[Mapping=tex-text]{AR PL KaitiM GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{AR PL SungtiL GB:style=Regular} 
+%\setmainfont[Mapping=tex-text]{WenQuanYi Zen Hei Mono:style=Regula}
+
+\author{吴泓鹰\\数学与应用数学(强基计划)\quad3210101890}
+\title{\textbf{一元二次方程在实数域上的求解}}
+%\date{}
+
+\begin{document}
+\maketitle
+总所周之，在实数上一元二次方程的求解是小学二年级就学会的内容，甚至于对于小学生而言这太过幼稚，相比之下，对于大学生来是就刚刚好。因此我准备在这里介绍如何在实数域求解一元二次方程并且使用TiKZ绘制算法流程图、使用Gnuplot绘制方程解的三种情况情况示意图的。(绘图参考了\cite{tikz}\cite{gnuplot})
+
+\CTEXsetup[format={\Large\bfseries}]{section}%使其后的标题左对齐
+\section{数学原理}	
+求解一元二次方程也就是求满足$ax^2+bx+c=0$的$x$的值，这里$a,b,c,x\in\mathbb{R}$,让我们采访一下不同人是怎么求$x$的吧：\cite{xiantong}
+\begin{enumerate}
+\item  \textbf{小学生}：作为一名优秀的小学生，老师告诉过我，解一元二次方程只需要配方，移项，开根号，移项化简，这样就能得到最终的解啦。
+	$$
+	ax^2+bx+c=0\Rightarrow a(x+\frac{b}{2a})^2+c-\frac{b^2}{4a}=0
+	\Rightarrow (x+\frac{b}{2a})^2=\frac{b^2-4ac}{4a^2}
+	$$
+	\begin{equation}\label{root}
+	\Rightarrow x+\frac{b}{2a}=\pm\sqrt{\frac{b^2-4ac}{4a^2}}
+	\Rightarrow x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+	\end{equation}
+\item \textbf{初中生}：作为一名优秀的初中生，我不知道什么配方法，只知道一元二次方程(可能)有两个根$x_1,x_2$,即$x=x_1$和$x_2$，因此有：
+	$$
+	x=\frac{x_1+x_2}{2}\pm\frac{|x_1-x_2|}{2}=\frac{x_1+x_2}{2}\pm\frac{\sqrt{(x_1+x_2)^2-4x_1 x_2}}{2}
+	$$
+	进而根据韦达定理：$x_1+x_2=-\frac{b}{a},x_1 x_2=\frac{c}{a}$，就可以把上式化为\ref{root}式中的结果啦。
+\item \textbf{高中生}：作为一名优秀的高中生，什么配方、韦达定理我都不会，只会求导、积分，所以有：
+	$$
+	f(x)=ax^2+bx+c\Rightarrow f'(x)=2ax+b\Rightarrow f(x)=\int f'(x)dx=\frac{(2ax+b)^2}{4a}+C
+	$$
+	$$
+	\Rightarrow C=c-\frac{b^2}{4a},\int f'(x)dx=0\Rightarrow \frac{(2ax+b)^2}{4a}=\frac{b^2}{4a}-c
+	$$
+	就可以类似地得到\ref{root}式中的结果啦。
+\item \textbf{大学生}：作为一名优秀的大学生，配方、韦达、求导、积分什么的我听都没听说过，但我知道一元五次方程没有根式解，这说明群$S_5$不可解，即不存在链$\{e\}\vartriangleleft...\vartriangleleft S_5$使得每一个群都是其后面一个群的正规子群，且相邻群做商群是一个abel群，这是因为$S_5$的正规子群$A_5$的正规子群恒为$A_5$。而对于一元二次方程，群$S_2\cong \mathbb{Z}_2$，而$\mathbb{Z}_2$是个able群，故$S_2$是个able群，又$S_2/\{e\}\cong S_2$,这表明一元二次方程有求根公式，但怎么得到这个求根公式，这超出了我的能力范围。
+\end{enumerate}
+\section{用TiKZ绘制算法流程图}	
+\begin{figure}[H]
+\tikzstyle{io} = [trapezium, trapezium left angle = 60, trapezium right angle = 120, minimum width = 1cm, text centered, draw = black, fill = white, align=center]
+\centering
+\begin{tikzpicture}[node distance=10pt]
+		\node[draw, rounded corners](start){开始};
+		\node[draw, io , below=of start](step 1){输入$a,b,c$};
+		\node[draw, below=of step 1](step 2){计算$\Delta=b^2-4ac$};
+		\node[draw, diamond, aspect=2, below=of step 2](choice1){$\Delta\ge0$};
+		\node[draw, right=30pt of choice1](choice2){利用\ref{root}式计算$x_1,x_2$};
+		\node[draw, io , below=28pt of choice2](step 4){输出$x_1,x_2$的值};
+		\node[draw, io , below=20pt of choice1](step 3){输出：该方程\\不存在实数根};
+		\node[draw, rounded corners, below=of step 3](end1){结束};
+		\node[draw, rounded corners, below=25pt of step 4](end2){结束};
+				
+		\graph{
+			(start) -> (step 1) -> (step 2) -> (choice1) ->["否"left] (step 3) -> (end1);
+			(choice1) ->["是"] (choice2) -> (step 4) -> (end2);
+		};
+\end{tikzpicture}
+\caption{一元二次方程求解算法流程图}
+\end{figure}
+\section{用Gnuplot绘制方程解情况的示意图}
+\begin{figure}[H]
+	\includegraphics[width=.9\textwidth]{./qeou.png}
+	\caption{一元二次方程三种接的情况示意图}
+\end{figure}
+	
+\bibliographystyle{plain}
+\bibliography{qeou.bib}	
+	
+\end{document}
