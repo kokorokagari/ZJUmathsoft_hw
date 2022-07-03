@@ -1,11 +1,10 @@
 make_dir:=$(shell pwd)
 
 report:
-	@gnuplot qeou.gp
-	@xelatex qeou.tex > 1.log
-	@bibtex qeou.aux > 1.log
-	@xelatex qeou.tex > 1.log
-	@xelatex qeou.tex > 1.log
+	@echo "report生成中，请稍等..."
+	@gnuplot gnuplot/qeou.gp
+	@mv qeou.png doc/
+	@make -C doc/ > 1.log
 	@rm 1.log
 	@find . -regextype posix-extended -regex ".*\.(aux|blg|log|bbl|out|png)" -type f -exec rm -f {} \;
 	@mv qeou.pdf report.pdf
