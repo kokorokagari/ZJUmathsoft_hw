@@ -53,7 +53,7 @@ def onclick(event):
    fig.canvas.draw_idle()
 
 fig.canvas.mpl_connect('button_press_event', onclick)
-plt.savefig('show.png' ,dpi=300)
+plt.savefig('../../png/300dpi/show.png' ,dpi=300)
 plt.tight_layout()
 
 

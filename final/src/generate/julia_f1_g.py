@@ -15,7 +15,7 @@ N=int(N1)
 R=2 #迭代半径
 a=3.0 #绘制图的横轴大小
 b=3.0 #绘制图的纵轴大小
-step=0.001 #绘制点的步长
+step=0.003 #绘制点的步长
 name1 = 'julia_f1'+'_N'+N1
 #迭代过程
 def iterate(z,N,R):
@@ -38,5 +38,4 @@ plot.imshow(Z,extent=(-a/2.0,a/2.0,-b/2.0,b/2.0))
 #,cmap=plot.cm.gray_r)
 cb = plot.colorbar(orientation='vertical',shrink=1)
 cb.set_label('iteration counts')
-plot.savefig('%s.png' %(name1),dpi=600)
-plot.show()
+plot.savefig('../../png/300dpi/%s.png' %(name1),dpi=300)

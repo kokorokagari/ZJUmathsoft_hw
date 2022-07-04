@@ -6,10 +6,10 @@ import matplotlib.pyplot as plot
 x0=0 #初始值z0的x0
 y0=0 #初始值z0的y0
 zoom=1.0 #放大倍率
-N1=input("N = ") #最大迭代次数
+N1=input("迭代次数：N = ") #最大迭代次数
 N=int(N1)
-cx1=input("cx = ") #c的实部
-cy1=input("cy = ") #c的虚部
+cx1=input("c的实部：cx = ") #c的实部
+cy1=input("c的虚部：cy = ") #c的虚部
 cx=float(cx1)
 cy=float(cy1)
 R=2 #迭代半径
@@ -41,5 +41,5 @@ plot.imshow(Z,extent=(-a/2.0,a/2.0,-b/2.0,b/2.0))
 #,cmap=plot.cm.gray_r)
 cb = plot.colorbar(orientation='vertical',shrink=1)
 cb.set_label('iteration counts')
-plot.savefig('%s.png' %(name1),dpi=600)
+plot.savefig('png/600dpi/%s.png' %(name1),dpi=600)
 plot.show()

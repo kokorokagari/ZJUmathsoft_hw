@@ -1,0 +1,12 @@
+----------------------------------------------------------------------
+make或make help：获取使用说明;
+make report：在该目录下生成report;
+make slide：在该目录下生成slide;
+make rereport：可以在没有任何png图片的情况在该目录下生成report;
+	(需要ipython3环境和numpy与matplotlib库,可能需要一些时间)
+make relation：得到观察Mandelbrot集和Julia集关系图像的窗口;
+	(需要ipython3环境和numpy与matplotlib库,可能需要一些时间)
+make picture：在输入参数后在png/600dpi目录下生成相应的Julia集(高清)图片;
+	(需要ipython3环境和numpy与matplotlib库,可能需要一些时间)
+make clean：删除report与slide;
+----------------------------------------------------------------------
