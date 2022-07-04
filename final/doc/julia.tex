@@ -19,32 +19,10 @@
 \usetikzlibrary{graphs, positioning, quotes, shapes.geometric}
 \usepackage{array}
 
-\usepackage{listings}%更好看的代码
-\usepackage{xltxtra}%listings中文支持
 \usepackage{color}%listings字体颜色相关
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-
-\lstset{frame=tb,%listings代码区各种设置
-	language=Python,
-	aboveskip=3mm,
-	belowskip=3mm,
-	showstringspaces=false,
-	columns=flexible,
-	basicstyle={\small\ttfamily},
-	numbers=left,%设置行号位置none不显示行号
-	%numberstyle=\tiny\courier, %设置行号大小
-	numberstyle=\tiny\color{gray},
-	keywordstyle=\color{blue},
-	commentstyle=\color{dkgreen},
-	stringstyle=\color{mauve},
-	breaklines=true,
-	breakatwhitespace=true,
-	escapeinside=``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
-	tabsize=4,
-	extendedchars=false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
-}
 
 \hypersetup{hypertex=true,%超链接设置
 	colorlinks=true,
@@ -139,10 +117,10 @@ Julia集一般可以定义为使得复函数$f_c(z)=z^2+c$经过无数次迭代�
 取$c=-0.4+0.6i$\cite{julia_wiki}，再分别取$N=20,50,100,200$,如图\ref{tu2}所示。可以观察到：随着迭代次数的增加，Julia集的图像的精细程度越来越高，同时也体现出了更明显的自相似性。
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx-0.4cy0.6_N20.png}
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx-0.4cy0.6_N50.png}
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx-0.4cy0.6_N100.png}
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx-0.4cy0.6_N200.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx-0.4cy0.6_N20.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx-0.4cy0.6_N50.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx-0.4cy0.6_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx-0.4cy0.6_N200.png}
 	\caption{$c=-0.4+0.6i,N=20,50,100,200$}
 	\label{tu2}
 \end{figure}
@@ -151,13 +129,13 @@ Julia集一般可以定义为使得复函数$f_c(z)=z^2+c$经过无数次迭代�
 取$N=100$，再分别取$c_1=-0.4+0.6i,c_2=-0.8i,c_3=0.285+0.01i,c_4=-0.8+0.156i$\cite{julia_wiki},如图\ref{tu3}所示。可以观察到，对于不同的$c$值而言，Julia集的图像差异极大，这正体现了前文中所提到的Julia集具有的“混沌”性质；同时无论$c$值如何变化，得到的图像总是自相似且对称的，这也是为什么我们还会将Julia集描述为复平面上分形点的集合的原因。
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx-0.4cy0.6_N100.png}
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx0cy-0.8_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx-0.4cy0.6_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx0cy-0.8_N100.png}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx0.285cy0.01_N100.png}
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_cx-0.8cy0.156_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx0.285cy0.01_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_cx-0.8cy0.156_N100.png}
 	\caption{$N=100,c=c_1,c_2,c_3,c_4$}
 	\label{tu3}
 \end{figure}
@@ -166,8 +144,8 @@ Julia集一般可以定义为使得复函数$f_c(z)=z^2+c$经过无数次迭代�
 取$N=100$，令$f_1(z)=z^3-0.071-1.134i$,$\displaystyle f_2(z)=\frac{(1-\frac{z^3}{6})}{(z-\frac{z^2}{2})^2}-0.616+0.45i$\cite{julia_wiki}，如图\ref{tu4}所示。可以观察的到，即使$f(z)$改变了，生成的Julia集的图像仍然具有分形的性质，在这之中体现出了数学之美。
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_f1_N100.png}
-	\includegraphics[width=.45\textwidth]{./png/300dpi/julia_f2_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_f1_N100.png}
+	\includegraphics[width=.45\textwidth]{../png/300dpi/julia_f2_N100.png}
 	\caption{$N=100,f(z)=f_1(z),f_2(z)$}
 	\label{tu4}
 \end{figure}
@@ -178,7 +156,7 @@ Julia集一般可以定义为使得复函数$f_c(z)=z^2+c$经过无数次迭代�
 这里在src目录下提供了一个python代码\texttt{man\_julia.py}\cite{julia_zhihuRe}，运行后可以得到一个窗口(如图\ref{tu5}所示)，点击左侧的Mandelbrot集的图像的某个点$c$的位置即可在右侧生成相应的Julia集的图像。可在根目录终端下执行命令\texttt{make relation}得到。
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{./png/300dpi/show.png}
+	\includegraphics[width=.8\textwidth]{../png/300dpi/show.png}
 	\caption{代码经ipython3运行后窗口展示}
 	\label{tu5}
 \end{figure}
@@ -191,3 +169,9 @@ Julia集一般可以定义为使得复函数$f_c(z)=z^2+c$经过无数次迭代�
 \bibliography{julia.bib}	
 
 \end{document}
+
+%有待改进的地方：
+%1.在重要的内容出加粗字体并且加上英文缩写；
+%2.流程图的绘制过于简单，可以加上颜色等更易与观看；
+%3.理想上我想弄gif图片，但技术上不支持我这么做;
+%4.还想整个小软件能直接输入数据然后生成，但还是技术不支持...
