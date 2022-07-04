@@ -1,4 +1,5 @@
 report:
+	@if [ ! -d ../log ]; then mkdir ../log; fi
 	xelatex julia.tex > ../log/1.log
 	bibtex julia.aux > ../log/1.log
 	xelatex julia.tex > ../log/1.log
